@@ -1,14 +1,18 @@
 import { Suspense, useEffect, useRef, type ComponentType } from "react";
 import { useTranslation } from "react-i18next";
 import { players, type SectionId } from "../data/formation";
+import Carregando from "./Carregando";
+import Experiencias from "./Experiencias";
+import Formacao from "./Formacao";
+import SobreMim from "./SobreMim";
 
 const EmBreve = () => null;
 
 const views: Record<SectionId, ComponentType> = {
-  sobre: EmBreve,
-  formacao: EmBreve,
+  sobre: SobreMim,
+  formacao: Formacao,
   curriculo: EmBreve,
-  experiencias: EmBreve,
+  experiencias: Experiencias,
   habilidades: EmBreve,
   projetos: EmBreve,
   wakatime: EmBreve,
@@ -20,14 +24,14 @@ const views: Record<SectionId, ComponentType> = {
 
 type Props = {
   id: SectionId;
-  onOpen: (id: SectionId) => void;
   onClose: () => void;
 };
 
-const Panel = ({ id, onOpen, onClose }: Props) => {
+const Panel = ({ id, onClose }: Props) => {
   const { t } = useTranslation();
   const title = useRef<HTMLHeadingElement>(null);
   const View = views[id];
+  const numero = players.find((player) => player.id === id)?.number;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,27 +43,16 @@ const Panel = ({ id, onOpen, onClose }: Props) => {
       <button type="button" className="back" onClick={onClose}>
         {t("app.back")}
       </button>
-      <nav className="shirts" aria-label={t("app.hint")}>
-        {players.map((player) => (
-          <button
-            key={player.id}
-            type="button"
-            className="chip"
-            data-live={player.live}
-            aria-current={player.id === id ? "page" : undefined}
-            aria-label={t(`nav.${player.id}`)}
-            title={t(`nav.${player.id}`)}
-            onClick={() => onOpen(player.id)}
-          >
-            {player.number}
-          </button>
-        ))}
-      </nav>
+      {numero !== undefined && (
+        <span className="panel-numero" aria-hidden="true">
+          {numero}
+        </span>
+      )}
       <div className="panel-corpo" key={id}>
         <h1 ref={title} tabIndex={-1}>
           {t(`nav.${id}`)}
         </h1>
-        <Suspense fallback={<p role="status">{t("app.loading")}</p>}>
+        <Suspense fallback={<Carregando />}>
           <View />
         </Suspense>
       </div>

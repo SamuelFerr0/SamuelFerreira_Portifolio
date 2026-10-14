@@ -1,23 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { formation, type SectionId } from "../data/formation";
-import { useSkin } from "../hooks/useSkin";
 import Camisa from "./Camisa";
 import Peixe from "./Peixe";
-import SkinSwitcher from "./SkinSwitcher";
 
 type Props = { onOpen: (id: SectionId) => void };
 
-const CAMISAS = ["jogo", "treino"] as const;
-
 const Pitch = ({ onOpen }: Props) => {
   const { t } = useTranslation();
-  const [camisa, setCamisa] = useSkin("camisa", CAMISAS, "jogo");
 
   return (
     <div className="pitch-wrap">
       <div
         className="pitch"
-        data-camisa={camisa}
         style={{ gridTemplateRows: `repeat(${formation.length}, 1fr)` }}
       >
         <div className="pitch-box" aria-hidden="true" />
@@ -32,7 +26,6 @@ const Pitch = ({ onOpen }: Props) => {
                 key={player.id}
                 type="button"
                 className="player"
-                data-live={player.live}
                 style={{ animationDelay: `${player.number * 70}ms` }}
                 onClick={() => onOpen(player.id)}
               >
@@ -45,13 +38,6 @@ const Pitch = ({ onOpen }: Props) => {
           </div>
         ))}
       </div>
-      <SkinSwitcher
-        label={t("app.camisa")}
-        skins={CAMISAS}
-        names={{ jogo: t("app.camisas.jogo"), treino: t("app.camisas.treino") }}
-        active={camisa}
-        onChange={setCamisa}
-      />
     </div>
   );
 };

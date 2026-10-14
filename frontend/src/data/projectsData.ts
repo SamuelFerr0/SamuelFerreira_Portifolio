@@ -1,0 +1,38 @@
+export const projectsData = [
+  {
+    id: 1,
+    titleId: "secure_proj_title",
+    descriptionId: "secure_proj_desc",
+    date: null,
+    gif: "/projects/secure-plus.png",
+    repoLink: "https://github.com/SamuelFerr0/Secure-",
+    technologies: ["HTML", "CSS", "JavaScript", "Node.js"],
+  },
+  {
+    id: 2,
+    titleId: "footscore_proj_title",
+    descriptionId: "footscore_proj_desc",
+    date: null,
+    gif: "/projects/footscore.png",
+    repoLink: "https://github.com/SamuelFerr0/football-insights",
+    technologies: ["HTML", "CSS", "JavaScript", "Bootstrap", "Chart.js"],
+  },
+  {
+    id: 3,
+    titleId: "castle_proj_title",
+    descriptionId: "castle_proj_desc",
+    date: null,
+    gif: "/projects/defend-the-castle.png",
+    repoLink: "https://github.com/SamuelFerr0/Defend-the-Castle",
+    technologies: ["Python", "Pygame"],
+  },
+  {
+    id: 4,
+    titleId: "clima_proj_title",
+    descriptionId: "clima_proj_desc",
+    date: "2026-08",
+    gif: "/projects/climaapi.png",
+    repoLink: "https://github.com/SamuelFerr0/climaapi",
+    technologies: ["Java", "Spring Boot", "Maven"],
+  },
+] as const;

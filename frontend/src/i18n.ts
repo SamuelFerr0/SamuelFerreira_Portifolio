@@ -7,10 +7,8 @@ export const pt = {
     role: "Estudante de Engenharia de Software na PUC Minas",
     goal: "Buscando o primeiro estágio em desenvolvimento.",
     hint: "Escolha um jogador para abrir uma seção.",
-    legend: "Borda tracejada: dados ao vivo",
-    vila: "Vila Belmiro · Meninos da Vila",
-    camisa: "Camisa",
-    camisas: { jogo: "Jogo", treino: "Treino" },
+    vila: "Vila Belmiro · Meninos da Vila · desde 1912",
+    alvinegro: "Alvinegro Praiano",
     back: "Voltar ao campo",
     lang: "Idioma",
     loading: "Carregando…",
@@ -18,6 +16,8 @@ export const pt = {
       "Não foi possível carregar agora. O servidor pode estar acordando; tente de novo em um minuto.",
     empty: "Nada para mostrar ainda.",
     menu: "Menu principal",
+    abrirMenu: "Abrir a prancheta",
+    fechar: "Fechar",
     shortcuts: "Links rápidos",
   },
   nav: {
@@ -46,9 +46,9 @@ export const pt = {
       periodo: "2º período",
       estagio: "Buscando estágio em desenvolvimento",
     },
-    p1: "Estou no segundo período de Engenharia de Software na PUC Minas, aprendendo a construir coisas de verdade, não só a decorar sintaxe.",
-    p2: "Gosto de projetos que resolvem um problema concreto: um mapa que aponta o setor mais perigoso de um estádio, um site que organiza estatísticas de futebol, um jogo que ensina lógica de defesa. Cada repositório no meu GitHub é uma prática nova.",
-    p3: "Sou santista e o site tem esse clima: o campo é a Vila Belmiro, a camisa 10 é dos Projetos e o rodapé é dos Meninos da Vila.",
+    p1: "Sou o Samuel, estudo Engenharia de Software na PUC Minas e estou no segundo período. Aprendo fazendo projetos.",
+    p2: "Já fiz um site de estatísticas de futebol, um jogo de defesa de torre em Python e, em grupo, uma plataforma de segurança para estádios. Hoje uso Java com Spring Boot no back-end e estou aprendendo React e TypeScript.",
+    p3: "Sou santista, e o site é uma homenagem: o campo é a Vila Belmiro e a camisa 10 é a dos Projetos. Procuro meu primeiro estágio em desenvolvimento.",
     items: {
       formacao: {
         label: "Formação",
@@ -159,6 +159,7 @@ export const pt = {
   },
   atividade: {
     text: "Últimos commits nos meus repositórios atualizados mais recentemente.",
+    resumo: "Commits: {{commits}} · Repositórios: {{repos}}",
   },
   contato: {
     text: "Aberto a oportunidades de estágio em desenvolvimento.",
@@ -243,8 +244,8 @@ export const pt = {
     ativar_escuro: "Ativar tema preto",
   },
   visitas: {
-    total_one: "{{count, number}} visita",
-    total_other: "{{count, number}} visitas",
+    total_one: "{{count, number}} torcedor já passou por aqui",
+    total_other: "{{count, number}} torcedores já passaram por aqui",
   },
   livro: {
     text: "Deixe um recado de passagem. As mensagens aparecem aqui para todo mundo.",
@@ -269,16 +270,16 @@ const english: typeof pt = {
     role: "Software Engineering student at PUC Minas",
     goal: "Looking for my first software development internship.",
     hint: "Pick a player to open a section.",
-    legend: "Dashed outline: live data",
-    vila: "Vila Belmiro · Meninos da Vila",
-    camisa: "Kit",
-    camisas: { jogo: "Match", treino: "Training" },
+    vila: "Vila Belmiro · Meninos da Vila · since 1912",
+    alvinegro: "Alvinegro Praiano",
     back: "Back to the pitch",
     lang: "Language",
     loading: "Loading…",
     failed: "Could not load right now. The server may be waking up; try again in a minute.",
     empty: "Nothing to show yet.",
     menu: "Main menu",
+    abrirMenu: "Open the tactics board",
+    fechar: "Close",
     shortcuts: "Quick links",
   },
   nav: {
@@ -307,9 +308,9 @@ const english: typeof pt = {
       periodo: "2nd semester",
       estagio: "Looking for a development internship",
     },
-    p1: "I'm in my second semester of Software Engineering at PUC Minas, and I'm here to build real things, not just memorize syntax.",
-    p2: "I like projects that solve a concrete problem: a map that flags the riskiest sector of a stadium, a site that organizes football stats, a game built around defense logic. Each repo on my GitHub is another round of practice.",
-    p3: "I'm a Santos fan, and the site shows it: the pitch is Vila Belmiro, the number 10 shirt goes to Projects, and the footer is a nod to the Meninos da Vila.",
+    p1: "I'm Samuel, a Software Engineering student at PUC Minas in my second semester. I learn by building projects.",
+    p2: "I've built a football stats site, a tower defense game in Python and, with a team, a safety platform for stadiums. Now I use Java with Spring Boot on the back end and I'm learning React and TypeScript.",
+    p3: "I'm a Santos fan, and the site is a tribute: the pitch is Vila Belmiro and the number 10 shirt is the Projects one. I'm looking for my first software development internship.",
     items: {
       formacao: {
         label: "Education",
@@ -420,6 +421,7 @@ const english: typeof pt = {
   },
   atividade: {
     text: "Latest commits from my most recently updated repositories.",
+    resumo: "Commits: {{commits}} · Repositories: {{repos}}",
   },
   contato: {
     text: "Open to software development internship opportunities.",
@@ -503,8 +505,8 @@ const english: typeof pt = {
     ativar_escuro: "Switch to black theme",
   },
   visitas: {
-    total_one: "{{count, number}} visit",
-    total_other: "{{count, number}} visits",
+    total_one: "{{count, number}} supporter has stopped by",
+    total_other: "{{count, number}} supporters have stopped by",
   },
   livro: {
     text: "Leave a note on your way through. Everyone who visits can see it here.",

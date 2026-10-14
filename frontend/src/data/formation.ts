@@ -11,28 +11,28 @@ export type SectionId =
   | "atividade"
   | "livro";
 
-export type Player = { id: SectionId; number: number; live: boolean };
+export type Player = { id: SectionId; number: number };
 
 export const liveEnabled = Boolean(import.meta.env.VITE_API_URL);
 
 export const formation: Player[][] = [
   [
-    { id: "habilidades", number: 9, live: false },
-    { id: "projetos", number: 10, live: false },
-    { id: "livro", number: 11, live: true },
+    { id: "habilidades", number: 9 },
+    { id: "projetos", number: 10 },
+    { id: "livro", number: 11 },
   ],
   [
-    { id: "wakatime", number: 6, live: true },
-    { id: "linguagens", number: 7, live: true },
-    { id: "atividade", number: 8, live: true },
+    { id: "wakatime", number: 6 },
+    { id: "linguagens", number: 7 },
+    { id: "atividade", number: 8 },
   ],
   [
-    { id: "sobre", number: 2, live: false },
-    { id: "formacao", number: 3, live: false },
-    { id: "curriculo", number: 4, live: false },
-    { id: "experiencias", number: 5, live: false },
+    { id: "sobre", number: 2 },
+    { id: "formacao", number: 3 },
+    { id: "curriculo", number: 4 },
+    { id: "experiencias", number: 5 },
   ],
-  [{ id: "contato", number: 1, live: false }],
+  [{ id: "contato", number: 1 }],
 ];
 
 export const players: Player[] = formation.flat().sort((a, b) => a.number - b.number);
