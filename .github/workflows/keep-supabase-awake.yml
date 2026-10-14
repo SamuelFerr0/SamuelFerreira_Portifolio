@@ -1,0 +1,22 @@
+name: Keep Supabase Awake
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    env:
+      API_URL: ${{ vars.API_URL }}
+    steps:
+      - name: Chamar a API (que consulta o banco)
+        run: |
+          if [ -z "$API_URL" ]; then
+            echo "Defina a variável API_URL nas configurações do repositório."
+            exit 1
+          fi
+          curl -fsS --retry 3 --retry-delay 15 --max-time 90 \
+            "$API_URL/api/visitas" \
+            -o /dev/null -w "API respondeu HTTP %{http_code}\n"

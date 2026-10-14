@@ -5,12 +5,16 @@ import Carregando from "./Carregando";
 import Contato from "./Contato";
 import Experiencias from "./Experiencias";
 import Formacao from "./Formacao";
+import GitHubStats from "./GitHubStats";
 import Habilidades from "./Habilidades";
+import LivroVisitas from "./LivroVisitas";
 import Projetos from "./Projetos";
 import SobreMim from "./SobreMim";
+import WakaTime from "./WakaTime";
 
-const EmBreve = () => null;
 const Curriculo = lazy(() => import("./Curriculo"));
+const Linguagens = () => <GitHubStats section="linguagens" />;
+const Atividade = () => <GitHubStats section="atividade" />;
 
 const views: Record<SectionId, ComponentType> = {
   sobre: SobreMim,
@@ -19,10 +23,10 @@ const views: Record<SectionId, ComponentType> = {
   experiencias: Experiencias,
   habilidades: Habilidades,
   projetos: Projetos,
-  wakatime: EmBreve,
-  linguagens: EmBreve,
-  atividade: EmBreve,
-  livro: EmBreve,
+  wakatime: WakaTime,
+  linguagens: Linguagens,
+  atividade: Atividade,
+  livro: LivroVisitas,
   contato: Contato,
 };
 
