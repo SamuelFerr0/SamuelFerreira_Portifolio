@@ -1,25 +1,29 @@
-import { Suspense, useEffect, useRef, type ComponentType } from "react";
+import { lazy, Suspense, useEffect, useRef, type ComponentType } from "react";
 import { useTranslation } from "react-i18next";
 import { players, type SectionId } from "../data/formation";
 import Carregando from "./Carregando";
+import Contato from "./Contato";
 import Experiencias from "./Experiencias";
 import Formacao from "./Formacao";
+import Habilidades from "./Habilidades";
+import Projetos from "./Projetos";
 import SobreMim from "./SobreMim";
 
 const EmBreve = () => null;
+const Curriculo = lazy(() => import("./Curriculo"));
 
 const views: Record<SectionId, ComponentType> = {
   sobre: SobreMim,
   formacao: Formacao,
-  curriculo: EmBreve,
+  curriculo: Curriculo,
   experiencias: Experiencias,
-  habilidades: EmBreve,
-  projetos: EmBreve,
+  habilidades: Habilidades,
+  projetos: Projetos,
   wakatime: EmBreve,
   linguagens: EmBreve,
   atividade: EmBreve,
   livro: EmBreve,
-  contato: EmBreve,
+  contato: Contato,
 };
 
 type Props = {
