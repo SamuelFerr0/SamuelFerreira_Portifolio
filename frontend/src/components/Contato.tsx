@@ -17,6 +17,10 @@ type Status =
   | "contato.captcha_erro";
 type Errors = { name?: boolean; email?: boolean; message?: boolean };
 
+const MAX_NOME = 100;
+const MAX_EMAIL = 254;
+const MAX_MENSAGEM = 2000;
+
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Contato = () => {
@@ -58,9 +62,9 @@ const Contato = () => {
     }
 
     const found: Errors = {
-      name: name.length < 2,
-      email: !emailPattern.test(email),
-      message: message.length < 10,
+      name: name.length < 2 || name.length > MAX_NOME,
+      email: !emailPattern.test(email) || email.length > MAX_EMAIL,
+      message: message.length < 10 || message.length > MAX_MENSAGEM,
     };
     setErrors(found);
     if (found.name || found.email || found.message) return;
@@ -103,12 +107,15 @@ const Contato = () => {
     <div className="prose">
       <p>{t("contato.text")}</p>
       <Canais />
-      <form className="form" onSubmit={handleSubmit} noValidate>
+      <form className="form" onSubmit={handleSubmit} noValidate aria-busy={sending}>
+        <p role="status" aria-live="polite">
+          {status && t(status)}
+        </p>
         <label>
           {t("contato.name")}
           <input
             name="name"
-            maxLength={80}
+            maxLength={MAX_NOME}
             autoComplete="name"
             aria-invalid={errors.name ? "true" : undefined}
             aria-describedby={errors.name ? "error-name" : undefined}
@@ -124,7 +131,7 @@ const Contato = () => {
           <input
             name="email"
             type="email"
-            maxLength={120}
+            maxLength={MAX_EMAIL}
             autoComplete="email"
             aria-invalid={errors.email ? "true" : undefined}
             aria-describedby={errors.email ? "error-email" : undefined}
@@ -139,7 +146,7 @@ const Contato = () => {
           {t("contato.message")}
           <textarea
             name="message"
-            maxLength={2000}
+            maxLength={MAX_MENSAGEM}
             rows={6}
             aria-invalid={errors.message ? "true" : undefined}
             aria-describedby={errors.message ? "error-message" : undefined}
@@ -164,7 +171,6 @@ const Contato = () => {
         <button type="submit" className="button" disabled={sending}>
           {sending ? t("contato.sending") : t("contato.send")}
         </button>
-        <p role="status">{status && t(status)}</p>
       </form>
     </div>
   );

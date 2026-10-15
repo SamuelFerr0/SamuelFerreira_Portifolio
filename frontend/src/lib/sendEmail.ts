@@ -1,7 +1,7 @@
 import EMAILJS_CONFIG from "../config/emailJsConfig";
 
 const { SERVICE_ID, TEMPLATE_ID_FOR_ME, TEMPLATE_ID_FOR_SENDER, PUBLIC_KEY } = EMAILJS_CONFIG;
-const EMAILJS_OPTIONS = { publicKey: PUBLIC_KEY };
+const EMAILJS_OPTIONS = { publicKey: PUBLIC_KEY, blockHeadless: true };
 
 export const emailJsEnabled = Boolean(SERVICE_ID && TEMPLATE_ID_FOR_ME && PUBLIC_KEY);
 

@@ -12,7 +12,7 @@
 	<artifactId>portfolio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>portfolio</name>
-	<description>Back-end do portfólio de Samuel: WakaTime, GitHub, chatbot e livro de visitas</description>
+	<description>Back-end do portfólio</description>
 	<url/>
 	<licenses>
 		<license/>

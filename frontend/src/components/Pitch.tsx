@@ -29,7 +29,7 @@ const Pitch = ({ onOpen }: Props) => {
                 style={{ animationDelay: `${player.number * 70}ms` }}
                 onClick={() => onOpen(player.id)}
               >
-                <span className="shirt" data-dez={player.number === 10}>
+                <span className={player.number === 10 ? "shirt shirt-dez" : "shirt"}>
                   <Camisa numero={player.number} />
                 </span>
                 <span className="player-name">{t(`nav.${player.id}`)}</span>

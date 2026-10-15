@@ -43,6 +43,7 @@ export function obterVisitas(): Promise<number | null> {
   return promessa;
 }
 
+
 export function useVisitas(): number | null {
   const [total, setTotal] = useState<number | null>(null);
 

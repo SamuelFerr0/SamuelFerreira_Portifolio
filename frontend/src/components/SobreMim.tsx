@@ -1,11 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
-import type { SectionId } from "../data/formation";
-import { certificates } from "../data/certificates";
-import { projectsData } from "../data/projectsData";
 import { AVATAR, disciplinas, hoje, pessoal, secoes, type Texto } from "../data/sobreData";
-import { learning, practice } from "../data/skillsData";
 
 function iniciais(nome: string) {
   const partes = nome.split(" ").filter(Boolean);
@@ -16,26 +11,12 @@ function iniciais(nome: string) {
 
 const escolher = (texto: Texto, idioma: string) => (idioma.startsWith("en") ? texto.en : texto.pt);
 
-const Secao = ({
-  titulo,
-  to,
-  children,
-}: {
-  titulo: string;
-  to?: SectionId;
-  children: ReactNode;
-}) => {
-  const { t } = useTranslation();
-  return (
-    <section className="sobre-secao">
-      <div className="sobre-secao-cabecalho">
-        <h2>{titulo}</h2>
-        {to && <a href={`#/${to}`}>{t("sobre.ver", { name: t(`nav.${to}`) })}</a>}
-      </div>
-      {children}
-    </section>
-  );
-};
+const Secao = ({ titulo, children }: { titulo: string; children: ReactNode }) => (
+  <section className="sobre-secao">
+    <h2>{titulo}</h2>
+    {children}
+  </section>
+);
 
 function Avatar() {
   const { t } = useTranslation();
@@ -74,40 +55,26 @@ function Cabecalho() {
       <div>
         <p className="sobre-nome">{t("app.name")}</p>
         <p className="sobre-cargo">{t("app.role")}</p>
-        <ul className="tags">
-          <li>
-            <FaGraduationCap aria-hidden="true" />
-            {t("sobre.chips.periodo")}
-          </li>
-          <li>
-            <FaBriefcase aria-hidden="true" />
-            {t("sobre.chips.estagio")}
-          </li>
-        </ul>
       </div>
     </header>
   );
 }
 
-function Numeros() {
+function Ficha() {
   const { t } = useTranslation();
-  const cards: { id: "projetos" | "habilidades" | "certificados"; valor: number }[] = [
-    { id: "projetos" as const, valor: projectsData.length },
-    { id: "habilidades" as const, valor: practice.length + learning.length },
-    { id: "certificados" as const, valor: certificates.length },
-  ].filter((card) => card.valor > 0);
-
-  if (cards.length === 0) return null;
 
   return (
-    <ul className="sobre-kpis">
-      {cards.map((card) => (
-        <li key={card.id} className="sobre-kpi">
-          <span className="sobre-kpi-valor">{card.valor}</span>
-          <span className="sobre-kpi-rotulo">{t(`sobre.kpi.${card.id}`)}</span>
-        </li>
+    <dl className="sobre-ficha">
+      {secoes.map(({ id, to }) => (
+        <div key={id}>
+          <dt>{t(`sobre.items.${id}.label`)}</dt>
+          <dd>
+            {t(`sobre.items.${id}.text`)}
+            {to && <a href={`#/${to}`}>{t("sobre.ver", { name: t(`nav.${to}`) })} →</a>}
+          </dd>
+        </div>
       ))}
-    </ul>
+    </dl>
   );
 }
 
@@ -152,13 +119,7 @@ function Disciplinas() {
       {disciplinas.map((periodo) => (
         <div key={periodo.periodo}>
           <p className="sobre-periodo">{periodo.periodo}</p>
-          <ul className="sobre-tags">
-            {periodo.itens.map((disciplina) => (
-              <li key={disciplina} className="sobre-tag">
-                {disciplina}
-              </li>
-            ))}
-          </ul>
+          <p className="sobre-linha">{periodo.itens.join(" · ")}</p>
         </div>
       ))}
     </Secao>
@@ -175,16 +136,9 @@ function Pessoal() {
       {pessoal.map((grupo) => (
         <div key={grupo.id}>
           <p className="sobre-periodo">{escolher(grupo.rotulo, i18n.language)}</p>
-          <ul className="sobre-tags">
-            {grupo.itens.map((item) => {
-              const texto = escolher(item, i18n.language);
-              return (
-                <li key={texto} className="sobre-tag">
-                  {texto}
-                </li>
-              );
-            })}
-          </ul>
+          <p className="sobre-linha">
+            {grupo.itens.map((item) => escolher(item, i18n.language)).join(" · ")}
+          </p>
         </div>
       ))}
     </Secao>
@@ -200,12 +154,7 @@ const SobreMim = () => {
       <p>{t("sobre.p1")}</p>
       <p>{t("sobre.p2")}</p>
       <p>{t("sobre.p3")}</p>
-      <Numeros />
-      {secoes.map(({ id, to }) => (
-        <Secao key={id} titulo={t(`sobre.items.${id}.label`)} to={to}>
-          <p>{t(`sobre.items.${id}.text`)}</p>
-        </Secao>
-      ))}
+      <Ficha />
       <Hoje />
       <Disciplinas />
       <Pessoal />

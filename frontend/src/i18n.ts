@@ -153,6 +153,8 @@ export const pt = {
     editors: "Editores",
     categories: "Categorias",
     systems: "Sistemas operacionais",
+    projects: "Projetos",
+    profile: "Ver perfil no WakaTime",
     more: "+ {{count}} outros ({{time}}, {{percent}})",
     agora: {
       ativo: "Codando agora",
@@ -205,40 +207,6 @@ export const pt = {
     estudo_desc:
       "Graduação em Engenharia de Software, de 2026 até hoje. Estou em busca do meu primeiro estágio em desenvolvimento de software.",
     estudo_skills: "JavaScript, React, Node.js, Java, Spring Boot, Python",
-  },
-  ask: {
-    open: "Pergunte ao técnico",
-    title: "Técnico",
-    intro:
-      "Sou um assistente de IA do portfólio e respondo só com o que está aqui. Posso errar: confirme no currículo.",
-    placeholder: "Pergunte sobre projetos ou formação",
-    send: "Enviar",
-    close: "Fechar",
-    thinking: "Pensando…",
-    voce: "Você",
-    selo: "IA",
-    experimente: "Experimente perguntar:",
-    sugestoes: [
-      "Quais projetos você já fez?",
-      "O que você está estudando agora?",
-      "Quais tecnologias você usa?",
-      "Como posso falar com você?",
-    ],
-    erros: {
-      limite:
-        "Muitas perguntas por agora. Tente de novo mais tarde ou use o formulário de contato.",
-      limite_espera:
-        "Muitas perguntas por agora. Tente de novo em {{minutos}} min ou use o formulário de contato.",
-      limite_ia: "O assistente está sobrecarregado. Tente de novo em um minuto.",
-      falha_ia: "Não consegui responder agora. Tente de novo em um minuto.",
-      sem_chave: "O assistente ainda não está configurado.",
-      indisponivel:
-        "Não consegui responder agora. O servidor pode estar acordando; tente de novo em um minuto.",
-      rede: "Sem conexão com o servidor. Confira a internet e tente de novo.",
-      vazia: "O assistente não devolveu resposta. Tente reformular a pergunta.",
-      pergunta_longa: "A pergunta está longa demais. Resuma e tente de novo.",
-      pergunta_vazia: "Escreva uma pergunta primeiro.",
-    },
   },
   stats: {
     perfil: { desde: "no GitHub desde {{ano}}" },
@@ -431,6 +399,8 @@ const english: typeof pt = {
     editors: "Editors",
     categories: "Categories",
     systems: "Operating systems",
+    projects: "Projects",
+    profile: "View WakaTime profile",
     more: "+ {{count}} more ({{time}}, {{percent}})",
     agora: {
       ativo: "Coding now",
@@ -483,39 +453,6 @@ const english: typeof pt = {
     estudo_desc:
       "Software Engineering degree, from 2026 to today. I'm looking for my first software development internship.",
     estudo_skills: "JavaScript, React, Node.js, Java, Spring Boot, Python",
-  },
-  ask: {
-    open: "Ask the coach",
-    title: "Coach",
-    intro:
-      "I'm an AI assistant for this portfolio, and I only answer based on what's on it. I can get things wrong, so check the résumé.",
-    placeholder: "Ask about projects or education",
-    send: "Send",
-    close: "Close",
-    thinking: "Thinking…",
-    voce: "You",
-    selo: "AI",
-    experimente: "Try asking:",
-    sugestoes: [
-      "What projects have you built?",
-      "What are you studying right now?",
-      "Which technologies do you use?",
-      "How can I contact you?",
-    ],
-    erros: {
-      limite: "Too many questions for now. Try again later or use the contact form.",
-      limite_espera:
-        "Too many questions for now. Try again in {{minutos}} min or use the contact form.",
-      limite_ia: "The assistant is overloaded right now. Try again in a minute.",
-      falha_ia: "I couldn't answer right now. Try again in a minute.",
-      sem_chave: "The assistant isn't configured yet.",
-      indisponivel:
-        "I couldn't answer right now. The server may be waking up; try again in a minute.",
-      rede: "Can't reach the server. Check your connection and try again.",
-      vazia: "The assistant didn't return an answer. Try rephrasing your question.",
-      pergunta_longa: "That question is too long. Shorten it and try again.",
-      pergunta_vazia: "Type a question first.",
-    },
   },
   stats: {
     perfil: { desde: "on GitHub since {{ano}}" },

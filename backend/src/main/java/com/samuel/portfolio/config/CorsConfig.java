@@ -24,7 +24,7 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
                 .allowedOrigins(origins)
                 .allowedMethods("GET", "POST")
-                .exposedHeaders("X-Ask-Proxy", "X-GitHub-Proxy", "Retry-After")
+                .exposedHeaders("X-GitHub-Proxy", "Retry-After")
                 .maxAge(3600);
     }
 }

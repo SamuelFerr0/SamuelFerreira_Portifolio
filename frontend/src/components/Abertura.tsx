@@ -44,7 +44,7 @@ const Abertura = () => {
   if (!aberta) return null;
 
   return (
-    <div className="abertura" data-saindo={saindo} aria-hidden="true" onClick={fechar}>
+    <div className={saindo ? "abertura abertura-saindo" : "abertura"} aria-hidden="true" onClick={fechar}>
       <Peixe size={110} />
       <p className="abertura-vila">{t("app.alvinegro")}</p>
       <p className="abertura-nome">{t("app.vila")}</p>
