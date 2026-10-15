@@ -10,11 +10,12 @@ import Habilidades from "./Habilidades";
 import LivroVisitas from "./LivroVisitas";
 import Projetos from "./Projetos";
 import SobreMim from "./SobreMim";
-import WakaTime from "./WakaTime";
 
 const Curriculo = lazy(() => import("./Curriculo"));
 const Linguagens = () => <GitHubStats section="linguagens" />;
 const Atividade = () => <GitHubStats section="atividade" />;
+
+const EmBreve = () => null;
 
 const views: Record<SectionId, ComponentType> = {
   sobre: SobreMim,
@@ -23,7 +24,7 @@ const views: Record<SectionId, ComponentType> = {
   experiencias: Experiencias,
   habilidades: Habilidades,
   projetos: Projetos,
-  wakatime: WakaTime,
+  wakatime: EmBreve,
   linguagens: Linguagens,
   atividade: Atividade,
   livro: LivroVisitas,

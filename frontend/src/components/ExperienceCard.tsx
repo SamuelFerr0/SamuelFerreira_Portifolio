@@ -8,8 +8,10 @@ export type ExperienceView = {
   logo?: string;
 };
 
-const ExperienceCard = ({ experience }: { experience: ExperienceView }) => {
-  const { role, company, startDate, endDate, description, skills, logo } = experience;
+type ExperienceCardProps = { experience: ExperienceView };
+
+const ExperienceCard = ({ experience: item }: ExperienceCardProps) => {
+  const { role, company, startDate, endDate, description, skills, logo } = item;
 
   return (
     <div className="experience-card">
@@ -31,15 +33,15 @@ const ExperienceCard = ({ experience }: { experience: ExperienceView }) => {
         </p>
 
         <ul className="description-list">
-          {description.map((point, index) => (
-            <li key={index}>{point}</li>
+          {description.map((line, i) => (
+            <li key={i}>{line}</li>
           ))}
         </ul>
 
         <div className="skills-container">
-          {skills.map((skill, index) => (
-            <span key={index} className="skill-tag">
-              {skill}
+          {skills.map((tag, i) => (
+            <span key={i} className="skill-tag">
+              {tag}
             </span>
           ))}
         </div>

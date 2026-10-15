@@ -2,34 +2,35 @@ import { useTranslation } from "react-i18next";
 import { FaGlobeAmericas } from "react-icons/fa";
 import ThemeToggle from "./ThemeToggle";
 
-const LanguageSwitcher = ({ onLanguageChange }: { onLanguageChange?: () => void }) => {
+type LanguageSwitcherProps = { onChange?: () => void };
+
+const LanguageSwitcher = ({ onChange }: LanguageSwitcherProps) => {
   const { i18n } = useTranslation();
 
-  const changeLanguage = (lng: string) => {
-    void i18n.changeLanguage(lng);
-    if (onLanguageChange) {
-      onLanguageChange();
-    }
+  const selectLanguage = (code: string) => {
+    void i18n.changeLanguage(code);
+    onChange?.();
   };
 
-  const isPtActive = i18n.language.startsWith("pt");
-  const isEnActive = i18n.language.startsWith("en");
+  const current = i18n.language;
+  const ptSelected = current.startsWith("pt");
+  const enSelected = current.startsWith("en");
 
   return (
     <div className="switcherContainer">
-      <ThemeToggle onToggle={onLanguageChange} />
+      <ThemeToggle onToggle={onChange} />
       <span className="switcherDivider">|</span>
-      <FaGlobeAmericas className={`icon ${isEnActive ? "active" : ""}`} />
+      <FaGlobeAmericas className={`icon ${enSelected ? "active" : ""}`} />
       <span
-        className={`langText ${isPtActive ? "active" : ""}`}
-        onClick={() => changeLanguage("pt")}
+        className={`langText ${ptSelected ? "active" : ""}`}
+        onClick={() => selectLanguage("pt")}
       >
         PT
       </span>
       <span>|</span>
       <span
-        className={`langText ${isEnActive ? "active" : ""}`}
-        onClick={() => changeLanguage("en")}
+        className={`langText ${enSelected ? "active" : ""}`}
+        onClick={() => selectLanguage("en")}
       >
         EN
       </span>

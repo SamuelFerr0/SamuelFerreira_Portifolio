@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import API_CONFIG from "../config/apiConfig";
-import { Status } from "./GitHubStats";
+import Status from "./Status";
 
 type Mensagem = { id: string; nome: string; mensagem: string; data: string };
 type Situacao = "parado" | "enviando" | "ok" | "limite" | "falhou";

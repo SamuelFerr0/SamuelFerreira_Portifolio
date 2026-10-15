@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import EMAILJS_CONFIG from "../config/emailJsConfig";
 import RECAPTCHA_CONFIG from "../config/recaptchaConfig";
 import { links } from "../data/links";
+import { emailJsEnabled, sendEmail } from "../lib/sendEmail";
 import { useTheme } from "../theme/themeContext";
 import Canais from "./Canais";
 import ReCaptcha, { type ReCaptchaHandle } from "./ReCaptcha";
@@ -17,28 +17,34 @@ type Status =
   | "contato.captcha_erro";
 type Errors = { name?: boolean; email?: boolean; message?: boolean };
 
-const { SERVICE_ID, TEMPLATE_ID_FOR_ME, TEMPLATE_ID_FOR_SENDER, PUBLIC_KEY } = EMAILJS_CONFIG;
-const EMAILJS_OPTIONS = { publicKey: PUBLIC_KEY };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Contato = () => {
   const { t, i18n } = useTranslation();
   const { theme } = useTheme();
   const captchaEnabled = Boolean(RECAPTCHA_CONFIG.SITE_KEY);
-  const captcha = useRef<ReCaptchaHandle>(null);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<ReCaptchaHandle>(null);
   const [status, setStatus] = useState<Status>("");
+  const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaFailed, setCaptchaFailed] = useState(false);
+  const showCaptcha = captchaEnabled && !captchaFailed;
 
   const handleCaptchaChange = useCallback((token: string | null) => {
     setCaptchaToken(token);
     if (token) setStatus((current) => (current === "contato.captcha_pendente" ? "" : current));
   }, []);
 
-  const handleCaptchaError = useCallback(() => setStatus("contato.captcha_erro"), []);
+  const handleCaptchaError = useCallback(() => {
+    setCaptchaFailed(true);
+    setStatus("contato.captcha_erro");
+  }, []);
 
-  async function sendEmail(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (sending) return;
+
     const form = event.currentTarget;
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
@@ -59,7 +65,7 @@ const Contato = () => {
     setErrors(found);
     if (found.name || found.email || found.message) return;
 
-    if (!SERVICE_ID || !TEMPLATE_ID_FOR_ME || !PUBLIC_KEY) {
+    if (!emailJsEnabled) {
       const subject = encodeURIComponent(`Portfólio: mensagem de ${name}`);
       const body = encodeURIComponent(`${message}\n\n${name} <${email}>`);
       window.location.href = `mailto:${links.email}?subject=${subject}&body=${body}`;
@@ -68,39 +74,28 @@ const Contato = () => {
     }
 
     if (captchaEnabled && !captchaToken) {
-      setStatus("contato.captcha_pendente");
+      setStatus(captchaFailed ? "contato.captcha_erro" : "contato.captcha_pendente");
       return;
     }
 
+    setSending(true);
     setStatus("contato.sending");
     try {
-      const { default: emailjs } = await import("@emailjs/browser");
-      const time = new Date().toLocaleString(i18n.language);
-      const fields = { name, email, message, time };
-      const title = `Nova mensagem do portfólio de: ${name}`;
-      const token = captchaEnabled ? { "g-recaptcha-response": captchaToken } : {};
-
-      if (TEMPLATE_ID_FOR_SENDER) {
-        await emailjs.send(
-          SERVICE_ID,
-          TEMPLATE_ID_FOR_SENDER,
-          { ...fields, title: t("contato.assuntoConfirmacao"), ...token },
-          EMAILJS_OPTIONS
-        );
-        await emailjs.send(SERVICE_ID, TEMPLATE_ID_FOR_ME, { ...fields, title }, EMAILJS_OPTIONS);
-      } else {
-        await emailjs.send(
-          SERVICE_ID,
-          TEMPLATE_ID_FOR_ME,
-          { ...fields, title, ...token },
-          EMAILJS_OPTIONS
-        );
-      }
+      await sendEmail({
+        name,
+        email,
+        message,
+        language: i18n.language,
+        confirmationTitle: t("contato.assuntoConfirmacao"),
+        captchaToken: captchaEnabled ? captchaToken : null,
+      });
       form.reset();
-      captcha.current?.reset();
       setStatus("contato.ok");
     } catch {
       setStatus("contato.fail");
+    } finally {
+      setSending(false);
+      captchaRef.current?.reset();
     }
   }
 
@@ -108,7 +103,7 @@ const Contato = () => {
     <div className="prose">
       <p>{t("contato.text")}</p>
       <Canais />
-      <form className="form" onSubmit={sendEmail} noValidate>
+      <form className="form" onSubmit={handleSubmit} noValidate>
         <label>
           {t("contato.name")}
           <input
@@ -155,9 +150,9 @@ const Contato = () => {
             </span>
           )}
         </label>
-        {captchaEnabled && (
+        {showCaptcha && (
           <ReCaptcha
-            ref={captcha}
+            ref={captchaRef}
             siteKey={RECAPTCHA_CONFIG.SITE_KEY as string}
             theme={theme}
             language={i18n.language}
@@ -166,8 +161,8 @@ const Contato = () => {
           />
         )}
         <input className="hp" name="site" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-        <button type="submit" className="button" disabled={status === "contato.sending"}>
-          {status === "contato.sending" ? t("contato.sending") : t("contato.send")}
+        <button type="submit" className="button" disabled={sending}>
+          {sending ? t("contato.sending") : t("contato.send")}
         </button>
         <p role="status">{status && t(status)}</p>
       </form>

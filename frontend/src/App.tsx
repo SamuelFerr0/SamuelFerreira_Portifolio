@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Abertura from "./components/Abertura";
 import Bola from "./components/Bola";
@@ -7,11 +8,24 @@ import Header from "./components/Header";
 import Panel from "./components/Panel";
 import Pitch from "./components/Pitch";
 import TextoDigitado from "./components/TextoDigitado";
-import { useRoute } from "./lib/useRoute";
+import { liveEnabled } from "./data/formation";
+import API_CONFIG from "./config/apiConfig";
+import { useRoute } from "./lib/rota";
+import { useContagem } from "./lib/contagem";
+import { marcarAtividade, useVisitas } from "./lib/visitas";
 
 function App() {
   const { t } = useTranslation();
   const { route, go } = useRoute();
+  const visitas = useContagem(useVisitas());
+
+  useEffect(() => {
+    if (liveEnabled) fetch(`${API_CONFIG.BASE_URL}/api/health`).catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
+    marcarAtividade();
+  }, [route]);
 
   return (
     <>
@@ -28,6 +42,9 @@ function App() {
               <p>{t("app.goal")}</p>
               <Canais curriculo />
               <p className="hint">{t("app.hint")}</p>
+              {visitas !== null && (
+                <p className="visitas">{t("visitas.total", { count: visitas })}</p>
+              )}
             </div>
             <Pitch onOpen={go} />
           </div>

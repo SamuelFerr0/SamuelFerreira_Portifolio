@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaGithub } from "react-icons/fa";
 import { globeSkills } from "../data/globeSkills";
 import { learning, practice, type Skill } from "../data/skillsData";
-import { useSkin } from "../lib/useSkin";
+import { useSkin } from "../lib/skin";
 import SkinSwitcher from "./SkinSwitcher";
 
 const SkillsGlobe = lazy(() => import("./SkillsGlobe"));
