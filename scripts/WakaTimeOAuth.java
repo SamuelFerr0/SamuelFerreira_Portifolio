@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WakaTimeOAuth {
 
@@ -43,7 +44,7 @@ public class WakaTimeOAuth {
                 message = "O WakaTime nao devolveu o codigo: " + query.getOrDefault("error", "erro desconhecido");
                 code.completeExceptionally(new IllegalStateException(message));
             } else {
-                message = "Pronto! Pode fechar esta aba.";
+                message = "Pronto! Pode fechar esta aba e voltar ao terminal.";
                 code.complete(query.get("code"));
             }
             byte[] body = message.getBytes(StandardCharsets.UTF_8);
@@ -79,10 +80,12 @@ public class WakaTimeOAuth {
                 System.err.println("Falha ao trocar o codigo (HTTP " + response.statusCode() + "): " + response.body());
                 System.exit(1);
             }
-            Map<String, String> tokens = parse(response.body().trim());
-            System.out.println("WAKATIME_ACCESS_TOKEN=" + tokens.get("access_token"));
-            System.out.println("WAKATIME_REFRESH_TOKEN=" + tokens.get("refresh_token"));
-            System.out.println("expires_at=" + tokens.get("expires_at"));
+
+
+            String json = response.body().trim();
+            System.out.println("WAKATIME_ACCESS_TOKEN=" + extrairCampoJson(json, "access_token"));
+            System.out.println("WAKATIME_REFRESH_TOKEN=" + extrairCampoJson(json, "refresh_token"));
+            System.out.println("expires_at=" + extrairCampoJson(json, "expires_at"));
         } finally {
             server.stop(0);
         }
@@ -105,5 +108,15 @@ public class WakaTimeOAuth {
             }
         }
         return result;
+    }
+
+
+    private static String extrairCampoJson(String json, String campo) {
+        Pattern pattern = Pattern.compile("\"" + campo + "\":\\s*\"?([^\",}]+)\"?");
+        Matcher matcher = pattern.matcher(json);
+        if (matcher.find()) {
+            return matcher.group(1).replace("\"", "").trim();
+        }
+        return "null";
     }
 }

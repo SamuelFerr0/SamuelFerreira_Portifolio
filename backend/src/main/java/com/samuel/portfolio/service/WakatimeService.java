@@ -61,7 +61,6 @@ public class WakatimeService {
         if (response.data() == null) {
             throw new WakaTimeException(WakaTimeException.Reason.UNAVAILABLE, "Estatisticas sem dados");
         }
-
         if ("pending_update".equals(response.data().status()) || response.data().languages() == null) {
             throw new WakaTimeException(WakaTimeException.Reason.PENDING, "Estatisticas ainda sendo calculadas");
         }

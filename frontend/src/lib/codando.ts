@@ -49,7 +49,6 @@ async function buscar(): Promise<CodandoEstado> {
   }
 }
 
-
 const intervaloMs = (estado: CodandoEstado | null) =>
   estado?.status === "ok" && estado.dados.atualizarSegundos > 0
     ? estado.dados.atualizarSegundos * 1000
@@ -97,7 +96,6 @@ export function useCodando(ativo = true): CodandoEstado {
       void obterCodando().then((novo) => {
         if (!vivo) return;
         setEstado(novo);
-        // 204 e 503 chegam aqui como "indisponivel": para de consultar
         if (novo.status === "indisponivel") {
           parado = true;
           return;

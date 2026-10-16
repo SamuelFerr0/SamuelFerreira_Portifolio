@@ -1,0 +1,8 @@
+const ASK_CONFIG = {
+  PROXY_PATH: "/api/ask",
+  MAX_PERGUNTA: 500,
+  MAX_HISTORICO: 6,
+  MAX_TEXTO_HISTORICO: 1500,
+};
+
+export default ASK_CONFIG;

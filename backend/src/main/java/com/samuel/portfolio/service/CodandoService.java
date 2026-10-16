@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +55,8 @@ public class CodandoService {
     private record Cached<T>(long at, T value) {
     }
 
-    private Cached<CodandoView> cache;
+    private final ReentrantLock refresh = new ReentrantLock();
+    private volatile Cached<CodandoView> cache;
     private Cached<Map<String, String>> editors;
 
     public CodandoService(WakaTimeClient client,
@@ -80,14 +82,32 @@ public class CodandoService {
         return refreshSeconds > 0;
     }
 
-    public synchronized CodandoView state() {
-        long now = System.currentTimeMillis();
-        if (cache != null && now - cache.at() < CACHE_MS) {
-            return cache.value();
+    public CodandoView state() {
+        Cached<CodandoView> current = cache;
+        if (fresh(current)) {
+            return current.value();
         }
-        CodandoView view = build(now);
-        cache = new Cached<>(now, view);
-        return view;
+        if (current == null) {
+            refresh.lock();
+        } else if (!refresh.tryLock()) {
+            return current.value();
+        }
+        try {
+            Cached<CodandoView> again = cache;
+            if (fresh(again)) {
+                return again.value();
+            }
+            long now = System.currentTimeMillis();
+            CodandoView view = build(now);
+            cache = new Cached<>(now, view);
+            return view;
+        } finally {
+            refresh.unlock();
+        }
+    }
+
+    private static boolean fresh(Cached<CodandoView> cached) {
+        return cached != null && System.currentTimeMillis() - cached.at() < CACHE_MS;
     }
 
     private CodandoView build(long now) {

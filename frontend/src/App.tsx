@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Abertura from "./components/Abertura";
+import Ask from "./components/Ask";
 import Bola from "./components/Bola";
 import Canais from "./components/Canais";
 import Footer from "./components/Footer";
@@ -52,6 +53,7 @@ function App() {
       </main>
       {route && <Bola onOpen={go} />}
       <Footer />
+      {liveEnabled && <Ask />}
     </>
   );
 }

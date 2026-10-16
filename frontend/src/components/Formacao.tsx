@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { certificates } from "../data/certificates";
 
 const Formacao = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const idioma = i18n.language.startsWith("en") ? "en" : "pt";
 
   return (
     <div className="prose">
@@ -14,20 +15,24 @@ const Formacao = () => {
         <>
           <h2>{t("formacao.certificates")}</h2>
           <ul className="plain">
-            {certificates.map((certificate) => (
-              <li key={certificate.name}>
-                {certificate.url ? (
-                  <a href={certificate.url} target="_blank" rel="noopener noreferrer">
-                    {certificate.name}
-                  </a>
-                ) : (
-                  certificate.name
-                )}
-                <span className="meta">
-                  {certificate.issuer}, {certificate.year}
-                </span>
-              </li>
-            ))}
+            {certificates.map((certificate) => {
+              const nome = certificate.name[idioma];
+              return (
+                <li key={certificate.name.pt}>
+                  {certificate.url ? (
+                    <a href={certificate.url} target="_blank" rel="noopener noreferrer">
+                      {nome}
+                    </a>
+                  ) : (
+                    nome
+                  )}
+                  <span className="meta">
+                    {certificate.issuer}, {certificate.year}
+                    {certificate.hours ? ` · ${certificate.hours}h` : ""}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </>
       )}

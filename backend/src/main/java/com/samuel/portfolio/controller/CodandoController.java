@@ -16,7 +16,6 @@ public class CodandoController {
 
     @GetMapping("/api/codando")
     public ResponseEntity<CodandoService.CodandoView> codando() {
-
         if (!service.enabled()) {
             return ResponseEntity.noContent().build();
         }

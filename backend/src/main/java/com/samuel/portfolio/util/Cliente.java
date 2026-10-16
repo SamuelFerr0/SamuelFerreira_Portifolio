@@ -9,7 +9,8 @@ public final class Cliente {
     public static String ip(HttpServletRequest request) {
         String encaminhado = request.getHeader("X-Forwarded-For");
         if (encaminhado != null && !encaminhado.isBlank()) {
-            return encaminhado.split(",")[0].trim();
+            String[] ips = encaminhado.split(",");
+            return ips[ips.length - 1].trim();
         }
         return request.getRemoteAddr();
     }

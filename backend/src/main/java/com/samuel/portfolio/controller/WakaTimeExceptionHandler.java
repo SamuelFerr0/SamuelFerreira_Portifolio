@@ -17,7 +17,6 @@ public class WakaTimeExceptionHandler {
 
     @ExceptionHandler(WakaTimeException.class)
     public ResponseEntity<Map<String, String>> wakatime(WakaTimeException exception) {
-
         log.error("WakaTime: {} ({})", exception.getMessage(), exception.reason(), exception);
         return switch (exception.reason()) {
             case NOT_CONFIGURED -> resposta(HttpStatus.SERVICE_UNAVAILABLE, "nao_configurado");

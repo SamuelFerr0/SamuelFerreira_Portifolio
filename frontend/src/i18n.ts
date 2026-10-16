@@ -46,9 +46,9 @@ export const pt = {
       periodo: "2º período",
       estagio: "Buscando estágio em desenvolvimento",
     },
-    p1: "Sou o Samuel, estudo Engenharia de Software na PUC Minas e estou no segundo período. Aprendo fazendo projetos.",
-    p2: "Já fiz um site de estatísticas de futebol, um jogo de defesa de torre em Python e, em grupo, uma plataforma de segurança para estádios. Hoje uso Java com Spring Boot no back-end e estou aprendendo React e TypeScript.",
-    p3: "Sou santista, e o site é uma homenagem: o campo é a Vila Belmiro e a camisa 10 é a dos Projetos. Procuro meu primeiro estágio em desenvolvimento.",
+    p1: "Sou o Samuel, comecei Engenharia de Software na PUC Minas, em Belo Horizonte, em 2026. Aprendo construindo: prefiro abrir um projeto e descobrir o que falta do que só ler sobre o assunto.",
+    p2: "Já fiz um site de estatísticas de futebol, um jogo de defesa de torre em Python e, em grupo, uma plataforma de segurança para estádios. Hoje uso Java com Spring Boot no back-end e estou aprendendo React e TypeScript, que são os que uso neste próprio site. Também fiz o curso de Introdução à Computação Quântica (30h) na PUC Minas, que me mostrou como pensar fora do básico.",
+    p3: "Sou santista, e o site é uma homenagem: o campo é a Vila Belmiro e a camisa 10 é a dos Projetos. Procuro meu primeiro estágio em desenvolvimento web, para aprender com um time de verdade e entregar código que alguém use.",
     items: {
       formacao: {
         label: "Formação",
@@ -56,11 +56,11 @@ export const pt = {
       },
       area: {
         label: "Área de atuação",
-        text: "Desenvolvimento web: front-end com HTML, CSS, JavaScript e React (em aprendizado) e back-end com Java e Spring Boot.",
+        text: "Desenvolvimento web: front-end com HTML, CSS, JavaScript e React com TypeScript (em aprendizado) e back-end com Java e Spring Boot.",
       },
       interesses: {
         label: "Interesses",
-        text: "Projetos que resolvem problemas concretos, como segurança em estádios, estatísticas de futebol e jogos, e construir aplicações do front-end ao back-end.",
+        text: "Projetos que resolvem problemas concretos, como segurança em estádios, estatísticas de futebol e jogos, construir aplicações do front-end ao back-end e computação quântica.",
       },
       objetivos: {
         label: "Objetivos",
@@ -208,6 +208,43 @@ export const pt = {
       "Graduação em Engenharia de Software, de 2026 até hoje. Estou em busca do meu primeiro estágio em desenvolvimento de software.",
     estudo_skills: "JavaScript, React, Node.js, Java, Spring Boot, Python",
   },
+  ask: {
+    open: "Pergunte ao técnico",
+    title: "Técnico",
+    intro:
+      "Sou um assistente de IA do portfólio e respondo só com o que está aqui. Posso errar: confirme no currículo.",
+    placeholder: "Pergunte sobre projetos ou formação",
+    send: "Enviar",
+    close: "Fechar",
+    parar: "Parar",
+    nova: "Nova conversa",
+    thinking: "Pensando…",
+    voce: "Você",
+    selo: "IA",
+    experimente: "Experimente perguntar:",
+    sugestoes: [
+      "Quais projetos você já fez?",
+      "O que você está estudando agora?",
+      "Quais tecnologias você usa?",
+      "Como posso falar com você?",
+    ],
+    erros: {
+      limite:
+        "Muitas perguntas por agora. Tente de novo mais tarde ou use o formulário de contato.",
+      limite_espera:
+        "Muitas perguntas por agora. Tente de novo em {{minutos}} min ou use o formulário de contato.",
+      limite_ia: "O assistente está sobrecarregado. Tente de novo em um minuto.",
+      falha_ia: "Não consegui responder agora. Tente de novo em um minuto.",
+      tempo: "A resposta demorou demais. Tente de novo em um minuto.",
+      sem_chave: "O assistente ainda não está configurado.",
+      indisponivel:
+        "Não consegui responder agora. O servidor pode estar acordando; tente de novo em um minuto.",
+      rede: "Sem conexão com o servidor. Confira a internet e tente de novo.",
+      vazia: "O assistente não devolveu resposta. Tente reformular a pergunta.",
+      pergunta_longa: "A pergunta está longa demais. Resuma e tente de novo.",
+      pergunta_vazia: "Escreva uma pergunta primeiro.",
+    },
+  },
   stats: {
     perfil: { desde: "no GitHub desde {{ano}}" },
     indicadores: {
@@ -292,9 +329,9 @@ const english: typeof pt = {
       periodo: "2nd semester",
       estagio: "Looking for a development internship",
     },
-    p1: "I'm Samuel, a Software Engineering student at PUC Minas in my second semester. I learn by building projects.",
-    p2: "I've built a football stats site, a tower defense game in Python and, with a team, a safety platform for stadiums. Now I use Java with Spring Boot on the back end and I'm learning React and TypeScript.",
-    p3: "I'm a Santos fan, and the site is a tribute: the pitch is Vila Belmiro and the number 10 shirt is the Projects one. I'm looking for my first software development internship.",
+    p1: "I'm Samuel, and I started a Software Engineering degree at PUC Minas, in Belo Horizonte, in 2026. I learn by building: I'd rather start a project and find out what I'm missing than only read about it.",
+    p2: "I've built a football stats site, a tower defense game in Python and, with a team, a safety platform for stadiums. Now I use Java with Spring Boot on the back end and I'm learning React and TypeScript, which are the same tools this site is built with. I also took the Introduction to Quantum Computing course (30h) at PUC Minas, which showed me how to think beyond the basics.",
+    p3: "I'm a Santos fan, and the site is a tribute: the pitch is Vila Belmiro and the number 10 shirt is the Projects one. I'm looking for my first web development internship, to learn with a real team and ship code that people actually use.",
     items: {
       formacao: {
         label: "Education",
@@ -302,11 +339,11 @@ const english: typeof pt = {
       },
       area: {
         label: "Field",
-        text: "Web development: front end with HTML, CSS, JavaScript and React (still learning it), and back end with Java and Spring Boot.",
+        text: "Web development: front end with HTML, CSS, JavaScript and React with TypeScript (still learning), and back end with Java and Spring Boot.",
       },
       interesses: {
         label: "Interests",
-        text: "Projects that solve concrete problems, like stadium safety, football stats and games, and building applications from front end to back end.",
+        text: "Projects that solve concrete problems, like stadium safety, football stats and games, building applications from front end to back end, and quantum computing.",
       },
       objetivos: {
         label: "Goals",
@@ -453,6 +490,42 @@ const english: typeof pt = {
     estudo_desc:
       "Software Engineering degree, from 2026 to today. I'm looking for my first software development internship.",
     estudo_skills: "JavaScript, React, Node.js, Java, Spring Boot, Python",
+  },
+  ask: {
+    open: "Ask the coach",
+    title: "Coach",
+    intro:
+      "I'm an AI assistant for this portfolio, and I only answer based on what's on it. I can get things wrong, so check the résumé.",
+    placeholder: "Ask about projects or education",
+    send: "Send",
+    close: "Close",
+    parar: "Stop",
+    nova: "New chat",
+    thinking: "Thinking…",
+    voce: "You",
+    selo: "AI",
+    experimente: "Try asking:",
+    sugestoes: [
+      "What projects have you built?",
+      "What are you studying right now?",
+      "Which technologies do you use?",
+      "How can I contact you?",
+    ],
+    erros: {
+      limite: "Too many questions for now. Try again later or use the contact form.",
+      limite_espera:
+        "Too many questions for now. Try again in {{minutos}} min or use the contact form.",
+      limite_ia: "The assistant is overloaded right now. Try again in a minute.",
+      falha_ia: "I couldn't answer right now. Try again in a minute.",
+      tempo: "The answer took too long. Try again in a minute.",
+      sem_chave: "The assistant isn't configured yet.",
+      indisponivel:
+        "I couldn't answer right now. The server may be waking up; try again in a minute.",
+      rede: "Can't reach the server. Check your connection and try again.",
+      vazia: "The assistant didn't return an answer. Try rephrasing your question.",
+      pergunta_longa: "That question is too long. Shorten it and try again.",
+      pergunta_vazia: "Type a question first.",
+    },
   },
   stats: {
     perfil: { desde: "on GitHub since {{ano}}" },

@@ -32,7 +32,6 @@ export class WakaTimeError extends Error {
 const requests = new Map<string, Promise<WakaTimeData>>();
 const cache = new Map<string, WakaTimeData>();
 
-
 const DEFAULT_KEY = "default";
 
 export const getCachedWakaTimeStats = (range?: string) => cache.get(range ?? DEFAULT_KEY) ?? null;

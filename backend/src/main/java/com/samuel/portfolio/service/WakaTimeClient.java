@@ -34,7 +34,6 @@ public class WakaTimeClient {
     private final String redirectUri;
     private final String tokenUrl;
 
-
     private String accessToken;
     private String refreshToken;
 
@@ -104,7 +103,6 @@ public class WakaTimeClient {
         }
     }
 
-    // devolve o access token valido; se outra thread ja renovou, so reaproveita
     private synchronized String refresh(String used) {
         if (!used.isBlank() && !used.equals(accessToken)) {
             return accessToken;
@@ -155,7 +153,6 @@ public class WakaTimeClient {
     private synchronized String refreshToken() {
         return refreshToken;
     }
-
 
     private static Map<String, String> parse(String body) {
         Map<String, String> result = new HashMap<>();
