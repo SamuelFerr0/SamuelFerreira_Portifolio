@@ -1,5 +1,3 @@
----
-
 # 🏷️ Portfólio de Samuel Ferreira Guimarães 👨‍💻
 
 > [!NOTE]
@@ -445,4 +443,4 @@ Este é um projeto acadêmico e pessoal, mas sugestões e correções são bem-v
 
 Partes da estrutura foram adaptadas do portfólio de João Paulo Aramuni, distribuído sob a Licença MIT. O texto da licença está em [LICENSE-aramuni](LICENSE-aramuni).
 
----
+
